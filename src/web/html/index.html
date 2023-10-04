@@ -19,16 +19,43 @@
                               <h2>Adding and Editing Items in the Warehouse</h2>
                         </li class="">
                         <li>
-                              <a href="add-index.html">Add Item</a>
+                              <a href="add-index.html"target="_blank" rel="noopener">Add Item</a>
                         </li class="">
                         <li>
-                              <a href="edit-index.html">Edit Item</a>
+                              <a href="edit-index.html" target="_blank" rel="noopener">Edit Item</a>
                         </li>
                   </ul>
 
             </nav>
             
       </header>
+      <main id="content" class=" page_main">
+
+         
+          
+    <script>
+        // Funkce pro načítání a zobrazení obsahu z add-index.html
+        function loadAddContent() {
+            // Zde můžeš přidat obsah, který chceš zobrazit z add-index.html
+            var addContent = `
+                <section class="add">
+                    <h2>kukuk</h2>
+                </section>
+            `;
+
+            var mainContent = document.getElementById('content');
+            mainContent.innerHTML = addContent;
+        }
+
+        // Přiřaďme funkci ke kliknutí na odkaz "Add Item"
+        var addLink = document.getElementById('add-link');
+        addLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Zabráníme přesměrování na odkaz
+            loadAddContent();
+        });
+              </script>
+      </main>
+      <footer class="page_footer"><h3></h3> &COPY;By me 🐻</h3></footer>
       <script src="/js/jQuery-colors.min.js"></script> 
       <script src="/js/jquery3-6-0-.min.js"></script>   
       <script src="/js/script.js"></script>

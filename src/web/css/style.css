@@ -43,9 +43,7 @@ html {
       background-position: center;
       background-repeat:no-repeat ;
       background-size: cover;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background-attachment: fixed;
   }
   .page_header{
    background-color: aqua;
@@ -94,6 +92,12 @@ html {
       align-self: center;
       padding: .5em;
   }
+  .page_main{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+  }
   section{
      width: 37.5em; /*600px*/
       height: 28.125em; /*450*/
@@ -103,6 +107,24 @@ html {
       color: #ee6352;
       position: relative;
       align-self: center;
+  }
+
+footer{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;   
+    max-width: 100%;
+    background-color: rgba(240, 248, 255, 0.459);
+    box-shadow: inset 3px 3px 35px #fff;
+    padding-bottom: 30px;
+    padding-top: 1em;
+    opacity: .8;
+    z-index: 1;
+  }
+  .add{
+     
   }
  
  
