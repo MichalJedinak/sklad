@@ -1,5 +1,11 @@
 @import url('https://fonts.googleleapsis.com/css?family=Pop pins:100,200,300,400,500,600,700,800.900');
 
+:root{
+      --crl-primary:#ee6352;
+      --clr-bg:#ff04;
+      --clr-body:#0e0d0d;
+      
+  }
 html {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -37,19 +43,20 @@ html {
       background-position: center;
       background-repeat:no-repeat ;
       background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
   }
   .page_header{
    background-color: aqua;
    padding: 2em;
    display: flex;
 }
-.nav {
-      /* background: pink; */
+.nav {     
       padding: 1px;
       flex-basis: 100%;
       flex-grow: 1;
-  }
-  
+  }  
   .nav_list {
       margin: 0;
       padding: 0;
@@ -58,30 +65,44 @@ html {
       gap: 1.5em;
       margin-left: 1em;
       text-align: center;
-      /* background:lightblue */
   }
   .nav_list a {
       color: var(--crl-primary);
+      font-weight: 600;
   }
   
   .nav_list a:hover,
   .nav_list a:focus {
       color: var(--clr-body);
+}
+   .nav_list li:nth-of-type(2):hover,
+   .nav_list li:nth-of-type(3):hover{
+        background-color: rgb(68, 217, 236);
   }
   
   .nav_list li:nth-of-type(1) {      
       margin-left: 0;
 }
 .nav_list li:nth-of-type(2) {
-      background-color: darkgrey;
+      background-color: rgb(123, 226, 240);
       margin-left: auto;
       align-self: center;
       padding: .5em;
   }
   .nav_list li:nth-of-type(3) {
-      background-color: darkgrey;
+      background-color: rgb(123, 226, 240);
       align-self: center;
       padding: .5em;
+  }
+  section{
+     width: 37.5em; /*600px*/
+      height: 28.125em; /*450*/
+      display: flex;
+      background-color:transparent;
+      border: .2rem  solid  whitesmoke;
+      color: #ee6352;
+      position: relative;
+      align-self: center;
   }
  
  
