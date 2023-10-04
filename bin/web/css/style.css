@@ -101,12 +101,14 @@ html {
   section{
      width: 37.5em; /*600px*/
       height: 28.125em; /*450*/
-      display: flex;
+      display: flex;flex-direction: column;
       background-color:transparent;
       border: .2rem  solid  whitesmoke;
       color: #ee6352;
       position: relative;
       align-self: center;
+      padding: 1em;
+      gap: 1em;
   }
 
 footer{
@@ -123,8 +125,31 @@ footer{
     opacity: .8;
     z-index: 1;
   }
-  .add{
-     
+  .add input {
+      position: relative;
+      width: 200px;
+      height: 3em;
+      margin: .5em;
+      font-family: 'Times New Roman', Times, serif;
+      font-style: italic;
+      font-size: 1em;
+  }
+  .add label {
+      position: relative;    
+      font-weight: bold;
+      font-size: 1.3em;
+  }
+  #count {
+     width: 6.25em;   
+  }
+  #add_form{
+     display: table;
+     gap: 2em;
+  }
+  #add_button{
+     width: 6.25em;
+      height: 2.7em;
+      font-family: 'Times New Roman', Times, serif;
   }
  
  
