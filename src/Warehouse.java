@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class Warehouse  extends JFrame implements ActionListener{
       JMenuBar bar = new JMenuBar();
-      JMenu menu = new JMenu("<html><h1>&#x2630;</h1></html>");
+      JMenu menu = new JMenu("<html><Selecting> &#x2630;</h1> </html>");
       JMenuItem item_1 = new JMenuItem("Modification ");
       JMenuItem item_2 = new JMenuItem("Adding");
 
@@ -54,7 +54,7 @@ public class Warehouse  extends JFrame implements ActionListener{
 
       String url  = "jdbc:mysql://localhost:3306/sklad";
       String user = "root";
-      String password = "show_pussy8squirrel~hairy";
+      private String password = "show_pussy8squirrel~hairy";
       public Warehouse(){
 
 
@@ -101,11 +101,13 @@ public class Warehouse  extends JFrame implements ActionListener{
             
             bar.add(menu);
             bar.setPreferredSize(new Dimension(900, 40));
+            menu.setFont(new Font("Roboto", Font.BOLD, 23));
             menu.add(item_1);
             menu.add(item_2);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);this.setBackground(Color.black);
             this.setIconImage(icon.getImage());
             this.setLayout(new MigLayout());
+            this.setTitle("   ADD OR EDIT DATA");
             this.setJMenuBar(bar);
             this.add(left,"gap right 30");
             this.add(right,"wrap,gap top 20");
