@@ -22,8 +22,5 @@ var section  = document.getElementById("section");
     function ShowEdit() {
         section.style.visibility="visible";
         add.style.opacity=0;           
-        edit.style.opacity=1; 
-        // edit.style.position="absolute";
-        // edit.style.left="10px";
-        // edit.style.top="10px";
+        edit.style.opacity=1;       
     }

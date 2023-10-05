@@ -165,10 +165,19 @@ footer{
       height: 2.7em;
       font-family: 'Times New Roman', Times, serif;
   }
+  #etit_form{
+
+  }
   .editing table tr th:first-child,
   .editing table thead tr th{
    padding-left: .7em;
     color: #ee6352;
+  }
+  table{
+    border: .02em solid black;
+  }
+  table th,table td{
+    border: .001em solid black;
   }
   .editing table td{
     color: #0e0d0d;
