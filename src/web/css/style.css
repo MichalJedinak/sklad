@@ -157,16 +157,20 @@ footer{
      width: 6.25em;   
   }
   #add_form{
-     display: table;
+     display: contents;
      gap: 2em;
+  }
+  #edit_form{
+    display: contents;
+    gap: 2em;
   }
   #add_button{
      width: 6.25em;
       height: 2.7em;
       font-family: 'Times New Roman', Times, serif;
   }
-  #etit_form{
-
+  .etiting label {
+    
   }
   .editing table tr th:first-child,
   .editing table thead tr th{

@@ -6,9 +6,8 @@
       <title>Werehouse</title>
       <link rel="shortcut icon" href="/src//resources/frame_icon.png" type="image/x-icon">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="/src/web/css/style.css">
-      <link rel="stylesheet" href="/src/web/css/normalize.css">
-      <link rel="stylesheet" href="/src/web/css/style.css">
+      <link rel="stylesheet" href="/sklad/src/web/css/style.css">
+      <link rel="stylesheet" href="/sklad/src/web/css/normalize.css">
 
 </head>
 <body>
@@ -19,10 +18,10 @@
                               <h2>Adding and Editing Items in the Warehouse</h2>
                         </li class="">
                         <li>
-                              <a href="add-index.html"target="_blank" rel="noopener">Add Item</a>
+                              <a  href="#"target="_parent" rel="noopener" onclick="ShowAdd()">Add Item</a>
                         </li class="">
                         <li>
-                              <a href="edit-index.html" target="_blank" rel="noopener">Edit Item</a>
+                              <a href="#" target="_parent" rel="noopener" onclick="ShowEdit()">Edit Item</a>
                         </li>
                   </ul>
 
@@ -31,33 +30,107 @@
       </header>
       <main id="content" class=" page_main">
 
-         
-          
-    <script>
-        // Funkce pro načítání a zobrazení obsahu z add-index.html
-        function loadAddContent() {
-            // Zde můžeš přidat obsah, který chceš zobrazit z add-index.html
-            var addContent = `
-                <section class="add">
-                    <h2>kukuk</h2>
-                </section>
-            `;
+            <section id="section">
 
-            var mainContent = document.getElementById('content');
-            mainContent.innerHTML = addContent;
-        }
+                  <div id="add" class="adding">
+                        <h2 class="group">Add new Item in to the Database </h2>
 
-        // Přiřaďme funkci ke kliknutí na odkaz "Add Item"
-        var addLink = document.getElementById('add-link');
-        addLink.addEventListener('click', function(event) {
-            event.preventDefault(); // Zabráníme přesměrování na odkaz
-            loadAddContent();
-        });
-              </script>
+                        <!-- <iframe src="#" frameborder="0" style="height:200px;width:300px;" title="Iframe Example"></iframe> -->
+                  <form action="" method="post" id="add_form">
+                        <label for="name">Item name</label>
+                        <input typ="text" id="addName" name="item_name" placeholder="Item_name"required><br>
+                        <label for="count">Item count</label>
+                        <input type="text" id="addCount" name="item_count" placeholder="Item_count"required> 
+                        <button name="addingButton" type="submit" id="add_button">Add Item</button>           
+                  </form>
+                  <table>
+                        <thead>
+                              <th>Id</th>
+                              <th>item_name</th>
+                              <th>item_count</th>
+                        </thead>
+                        <tbody>
+                              <tr>
+                                    <th>1</th>
+                                    <td>name 1</td>
+                                    <td>80</td>
+                              </tr>
+                              <tr>
+                                    <th>2</th>
+                                    <td>name 2</td>
+                                    <td>62</td>
+                              </tr>
+                              <tr>
+                                    <th>3</th>
+                                    <td>name 3</td>
+                                    <td>39</td>
+                              </tr>
+                              <tr>
+                                    <th>4</th>
+                                    <td>name 4</td>
+                                    <td>100</td>
+                              </tr>
+                              <tr>
+                                    <th>1</th>
+                                    <td>name</td>
+                                    <td>count</td>
+                              </tr>
+                        </tbody>
+                  </table>
+            </div>
+            
+            <div id="edit" class="editing">
+                  <form action="" method="post" id="edit_form">
+                        <label for="id">Id</label>
+                        <input typ="idText" id="editId" name="id" placeholder="id"required  readonly><br>
+                        <label for="editName">Item name</label>
+                        <input typ="editText" id="editName" name="item_name" placeholder="Item_name"required><br>
+                        <label for="editCount">Item count</label>
+                        <input type="editText" id="editCount" name="item_count" placeholder="Item_count"required> 
+                        <button name="editButton" type="submit" id="add_button">Edit Item</button>           
+                  </form>
+                  <table>
+                        <thead>
+                              <th>Id</th>
+                              <th>item_name</th>
+                              <th>item_count</th>
+                        </thead>
+                        <tbody>
+                              <tr>
+                                    <th>1</th>
+                                    <td>name 1</td>
+                                    <td>80</td>
+                              </tr>
+                              <tr>
+                                    <th>2</th>
+                                    <td>name 2</td>
+                                    <td>62</td>
+                              </tr>
+                              <tr>
+                                    <th>3</th>
+                                    <td>name 3</td>
+                                    <td>39</td>
+                              </tr>
+                              <tr>
+                                    <th>4</th>
+                                    <td>name 4</td>
+                                    <td>100</td>
+                              </tr>
+                              <tr>
+                                    <th>5</th>
+                                    <td>name 5</td>
+                                    <td>0</td>
+                              </tr>
+                        </tbody>
+                  </table>
+            </div>
+            
+       </section>
+            
       </main>
       <footer class="page_footer"><h3></h3> &COPY;By me 🐻</h3></footer>
-      <script src="/js/jQuery-colors.min.js"></script> 
-      <script src="/js/jquery3-6-0-.min.js"></script>   
-      <script src="/js/script.js"></script>
+      <script src="/sklad/src/web/js/jQuery-colors-mini.js"></script> 
+      <script src="/sklad/src/web/js/jquery3-6-0-min.js"></script>   
+      <script src="/sklad/src/web/js/srcript.js"></script>
 </body>
 </html>

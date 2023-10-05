@@ -99,7 +99,9 @@ html {
       height: 100vh;
   }
   section{
-     width: 37.5em; /*600px*/
+     position: relative;
+     visibility: hidden;
+      width: 37.5em; /*600px*/
       height: 28.125em; /*450*/
       display: flex;flex-direction: column;
       background-color:transparent;
@@ -109,6 +111,18 @@ html {
       align-self: center;
       padding: 1em;
       gap: 1em;
+  }
+  .adding{
+    opacity: 0;
+    position: absolute;
+    left: 1em;
+    top: 2em;
+  }
+  .editing{
+    opacity: 0;
+    position: absolute;
+    left: 1em;
+    top: 2em;
   }
 
 footer{
@@ -125,7 +139,7 @@ footer{
     opacity: .8;
     z-index: 1;
   }
-  .add input {
+  .adding input {
       position: relative;
       width: 200px;
       height: 3em;
@@ -134,7 +148,7 @@ footer{
       font-style: italic;
       font-size: 1em;
   }
-  .add label {
+  .adding label {
       position: relative;    
       font-weight: bold;
       font-size: 1.3em;
@@ -143,13 +157,44 @@ footer{
      width: 6.25em;   
   }
   #add_form{
-     display: table;
+     display: contents;
      gap: 2em;
+  }
+  #edit_form{
+    display: contents;
+    gap: 2em;
   }
   #add_button{
      width: 6.25em;
       height: 2.7em;
       font-family: 'Times New Roman', Times, serif;
+  }
+  .etiting label {
+    
+  }
+  .editing table tr th:first-child,
+  .editing table thead tr th{
+   padding-left: .7em;
+    color: #ee6352;
+  }
+  table{
+    border: .02em solid black;
+  }
+  table th,table td{
+    border: .001em solid black;
+  }
+  .editing table td{
+    color: #0e0d0d;
+    font-size: clamp(1.1em, 3vw,2em);
+    font-weight: bold;
+    text-shadow:0 0 8px #fff ;
+    padding-left: .7em;
+  }
+  .editing table th{
+    color: #0e0d0d;
+    font-size: clamp(1.1em, 3vw,2.1em);
+    font-weight: bold;
+    text-shadow:0 0 4px #fff ;
   }
  
  
