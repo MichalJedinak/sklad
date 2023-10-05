@@ -1,12 +1,22 @@
-var mainContent = document.getElementById('content');
+// var mainContent = document.getElementById('content');
 
-        fetch('add-index.html') 
-            .then(function(response) {
-                return response.text();
-            })
-            .then(function(data) {
-                mainContent.innerHTML = data;
-            })
-            .catch(function(error) {
-                console.error('Nepodarilo sa načítať obsah', error);
-            });
+//         fetch('#add') 
+//             .then(function(response) {
+//                 return response.text();
+//             })
+//             .then(function(data) {
+//                 mainContent.innerHTML = data;
+//             })
+//             .catch(function(error) {
+//                 console.error('Nepodarilo sa načítať obsah', error);
+//             });
+var add = document.getElementById("add");
+    edit = document.getElementById("edit");
+    function ShowAdd() {
+        add.style.opacity=1;           
+        edit.style.opacity=0;     
+    }
+    function ShowEdit() {
+        add.style.opacity=0;           
+        edit.style.opacity=1; 
+    }
