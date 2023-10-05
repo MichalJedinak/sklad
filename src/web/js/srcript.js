@@ -24,6 +24,6 @@ var section  = document.getElementById("section");
         add.style.opacity=0;           
         edit.style.opacity=1; 
         edit.style.position="absolute";
-        edit.style.left="25px";
-        edit.style.top="50px";
+        edit.style.left="10px";
+        edit.style.top="10px";
     }

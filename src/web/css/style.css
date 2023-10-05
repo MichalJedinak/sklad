@@ -158,6 +158,23 @@ footer{
       height: 2.7em;
       font-family: 'Times New Roman', Times, serif;
   }
+  .editing table tr th:first-child,
+  .editing table thead tr th{
+   padding-left: .7em;
+    color: #ee6352;
+  }
+  .editing table td{
+    color: #0e0d0d;
+    font-size: clamp(1.1em, 3vw,2.1em);
+    font-weight: bold;
+    text-shadow:0,0,5px #fff ;
+    padding-left: .7em;
+  }
+  .editing table th{
+    color: #0e0d0d;
+    font-size: clamp(1.1em, 3vw,2.1em);
+    font-weight: bold;
+  }
  
  
   
