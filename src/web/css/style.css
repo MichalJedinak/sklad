@@ -165,15 +165,16 @@ footer{
   }
   .editing table td{
     color: #0e0d0d;
-    font-size: clamp(1.1em, 3vw,2.1em);
+    font-size: clamp(1.1em, 3vw,2em);
     font-weight: bold;
-    text-shadow:0,0,5px #fff ;
+    text-shadow:0 0 8px #fff ;
     padding-left: .7em;
   }
   .editing table th{
     color: #0e0d0d;
     font-size: clamp(1.1em, 3vw,2.1em);
     font-weight: bold;
+    text-shadow:0 0 4px #fff ;
   }
  
  
