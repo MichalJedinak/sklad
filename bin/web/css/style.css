@@ -1,6 +1,7 @@
 @import url('https://fonts.googleleapsis.com/css?family=Pop pins:100,200,300,400,500,600,700,800.900');
 @import url("/src/web/css/normalize.css");
 @import url('/src/web/css/header.css');
+@import url("/src/web/css/footer.css");
 :root{
       --crl-primary:#ee6352;
       --clr-bg:#ff04;
@@ -72,21 +73,6 @@ html {
     position: absolute;
     left: 1em;
     top: 2em;
-  }
-
-footer{
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;   
-    max-width: 100%;
-    background-color: rgba(240, 248, 255, 0.459);
-    box-shadow: inset 3px 3px 35px #fff;
-    padding-bottom: 30px;
-    padding-top: 1em;
-    opacity: .8;
-    z-index: 1;
   }
   .adding input {
       position: relative;
