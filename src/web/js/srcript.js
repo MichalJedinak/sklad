@@ -10,13 +10,17 @@
 //             .catch(function(error) {
 //                 console.error('Nepodarilo sa načítať obsah', error);
 //             });
-var add = document.getElementById("add");
-    edit = document.getElementById("edit");
+var section  = document.getElementById("section");
+        add  = document.getElementById("add");
+       edit  = document.getElementById("edit");
+       section.style.visibility=hidden;
     function ShowAdd() {
+        section.style.visibility="visible";
         add.style.opacity=1;           
         edit.style.opacity=0;     
     }
     function ShowEdit() {
+        section.style.visibility="visible";
         add.style.opacity=0;           
         edit.style.opacity=1; 
     }
