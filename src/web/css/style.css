@@ -74,7 +74,7 @@ html {
     left: 1em;
     top: 2em;
   }
-  .adding input {
+ .adding input {
       position: relative;
       width: 200px;
       height: 3em;
@@ -103,9 +103,42 @@ html {
      width: 6.25em;
       height: 2.7em;
       font-family: 'Times New Roman', Times, serif;
+      background-color: lightgreen;
   }
-  .etiting label {
-    
+  #edit_form label{
+    font-weight: 700;
+    margin-right: 1em;
+    margin-bottom: .5em;
+    font-size: clamp(1.2em,4wv,1.9em);
+    color: darkred;
+    text-shadow: 1px 2px,9px black;
+  
+  }
+  #edit_form label:nth-last-of-type(4){
+    width: auto;
+    height: 80px;
+    padding: 5px;
+    margin-bottom: 1em;
+    font-size: clamp(2em,4wv,2.5em); 
+    font-weight: bold;    
+    text-transform: uppercase;
+    text-shadow: 2px 2px 15px white;
+    background-color: #fff;
+  }
+  #edit_form label:nth-of-type(2){
+    margin-right: 4.6em; 
+  }
+  #edit_form input{
+    width: 150px;
+    height: 30px;
+    margin-bottom: .5em;
+  }
+  #editId{
+    width: 80px;
+    background-color: #d8d3d3d2;
+  }
+  .etiting form label:first-child {
+    padding-left: 1em;
   }
   .editing table tr th:first-child,
   .editing table thead tr th{
