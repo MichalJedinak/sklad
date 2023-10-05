@@ -99,6 +99,7 @@ html {
       height: 100vh;
   }
   section{
+     position: relative;
      visibility: hidden;
       width: 37.5em; /*600px*/
       height: 28.125em; /*450*/
@@ -113,9 +114,15 @@ html {
   }
   .adding{
     opacity: 0;
+    position: absolute;
+    left: 1em;
+    top: 2em;
   }
   .editing{
     opacity: 0;
+    position: absolute;
+    left: 1em;
+    top: 2em;
   }
 
 footer{
