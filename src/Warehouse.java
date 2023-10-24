@@ -164,7 +164,7 @@ public class Warehouse  extends JFrame implements ActionListener{
             try {
                   connection = DriverManager.getConnection(url, user,password);
                   Statement statement = connection.createStatement();
-                  ResultSet resulset = statement.executeQuery("SELECT * FROM warehouse;");
+                  ResultSet resulset = statement.executeQuery("SELECT * FROM item;");
                
                   DefaultTableModel defaultModel = new DefaultTableModel();
                   /*  nastavíme pre defaul model údaje do stĺpcov ( table columns )
@@ -190,10 +190,10 @@ public class Warehouse  extends JFrame implements ActionListener{
                         int l = resulset.getInt(3);
                         String item_count= String.valueOf(l);
                    
-                        if(resulset.getString("item_name")==null){
+                        if(resulset.getString("name")==null){
                               item_name=" ";
                         }
-                        if(resulset.getInt("item_count")==0){
+                        if(resulset.getInt("available")==0){
                               item_count=" ";
                         }
                        
@@ -227,7 +227,7 @@ public class Warehouse  extends JFrame implements ActionListener{
             int id = Integer.parseInt(selectedId);
             int item_count = Integer.parseInt(selectedCount);
             // System.out.println(id);
-            String query = "UPDATE warehouse SET item_name = ? , item_count = ? WHERE id=?;";
+            String query = "UPDATE item SET name = ? , available = ? WHERE id=?;";
             Connection connection = null;
             try {
                   connection = DriverManager.getConnection(url, user, password);
@@ -256,7 +256,7 @@ public class Warehouse  extends JFrame implements ActionListener{
 
                   int id = Integer.parseInt(selectedId);
                   // System.out.println(id);
-                  String query = "DELETE FROM warehouse  WHERE id=?;";
+                  String query = "DELETE FROM item  WHERE id=?;";
                   Connection connection = null;
                   try {
                         connection = DriverManager.getConnection(url, user, password);
@@ -277,7 +277,7 @@ public class Warehouse  extends JFrame implements ActionListener{
 
       //  funkcia na vytvorenie noveho itemu 
       public void insertInToDatabaseNewItem(){
-            String query = "insert into warehouse (item_name,item_count) value(?,?);";
+            String query = "insert into item (name,available) value(?,?);";
             String text = field_5.getText();
             int item_count = Integer.parseInt(text);
             try {
