@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import entity.Item;
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.Color;
@@ -16,6 +17,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Warehouse  extends JFrame implements ActionListener{
+     public Item item;
       JMenuBar bar = new JMenuBar();
       JMenu menu = new JMenu("<html><Selecting> &#x2630;</h1> </html>");
       JMenuItem item_1 = new JMenuItem("Modification ");
@@ -30,9 +32,13 @@ public class Warehouse  extends JFrame implements ActionListener{
       JLabel info = new JLabel(" Create new Item!");
       JLabel label_1 = new JLabel("ID ");
       JTextField field_1 = new JTextField(15);
-      JLabel label_2 = new JLabel("Item_name ");
+      JLabel label_2 = new JLabel("Name ");
       JTextField field_2 = new JTextField(15);
-      JLabel label_3 = new JLabel("Item_count ");
+      JLabel label_6 = new JLabel("Desription ");
+      JTextField field_6 = new JTextField(15);
+       JLabel label_7 = new JLabel("Desription ");
+      JTextField field_7 = new JTextField(15);
+      JLabel label_3 = new JLabel("Available ");
       JTextField field_3 = new JTextField(15);
       JButton update= new JButton("Edit item");
       JButton back = new JButton("Back");
@@ -40,18 +46,16 @@ public class Warehouse  extends JFrame implements ActionListener{
       ArrayList<JTextField> filedList= new ArrayList<>();
       ArrayList<JButton> buttonList = new ArrayList<>();
       ArrayList<JLabel> labelList = new ArrayList<>();
-      ImageIcon icon = new ImageIcon("src\\resources\\frame_icon.png");
+      ImageIcon icon = new ImageIcon("src\\main\\resources\\img\\frame_icon.png");
       Image image ;
       JLabel imgLabel  = new JLabel(icon);
 
       JPanel right_2 = new JPanel();     
-      JLabel label_4 = new JLabel("Item_name ");
+      JLabel label_4 = new JLabel("Name ");
       JTextField field_4 = new JTextField(15);
-      JLabel label_5 = new JLabel("Item_count ");
+      JLabel label_5 = new JLabel("Avalilable ");
       JTextField field_5 = new JTextField(5);
       JButton create = new JButton("Create item");
-
-
       String url  = "jdbc:mysql://localhost:3306/sklad";
       String user = "root";
       private String password = "show_pussy8squirrel~hairy";
@@ -86,6 +90,8 @@ public class Warehouse  extends JFrame implements ActionListener{
             right.add(field_2,"gap left 25, wrap");
             right.add(label_3,"span 2");
             right.add(field_3,"gap left 25 ,wrap");
+            right.add(label_6,"span 2");
+            right.add(field_6,"gap left 25 , wrap");
             right.add(delete,"span 2,gap top 50");
             right.add(update,"gap left 100 ,gap top 50,wrap");
             right.add(back,"center, gap top 40");
@@ -97,6 +103,8 @@ public class Warehouse  extends JFrame implements ActionListener{
             right_2.add(field_4,"align left,wrap");
             right_2.add(label_5);
             right_2.add(field_5,"wrap,span 2");
+            right_2.add(label_7);
+            right_2.add(field_7," wrap");
             right_2.add(create,"center, gap top 25");
             
             bar.add(menu);
@@ -117,8 +125,9 @@ public class Warehouse  extends JFrame implements ActionListener{
             ////  pridanie do array listov 
             labelList.add(label);labelList.add(info);labelList.add(label_1);
             labelList.add(label_2);labelList.add(label_3);labelList.add(label_4);labelList.add(label_5);
+            labelList.add(label_6);labelList.add(label_7);
             filedList.add(field_1);filedList.add(field_2);filedList.add(field_3);filedList.add(field_4);
-            filedList.add(field_5);
+            filedList.add(field_5);filedList.add(field_6);filedList.add(field_7);
             buttonList.add(button);buttonList.add(update);buttonList.add(delete);buttonList.add(create);
             // jednotné nastavenie pre elementy v array listoch
             for(JLabel label :labelList){
@@ -189,6 +198,8 @@ public class Warehouse  extends JFrame implements ActionListener{
                         String item_name=    resulset.getString(2);
                         int l = resulset.getInt(3);
                         String item_count= String.valueOf(l);
+                        String descString = resulset.getString("description") ;
+                        String create_at = resulset.getString("created_at");
                    
                         if(resulset.getString("name")==null){
                               item_name=" ";
@@ -197,7 +208,7 @@ public class Warehouse  extends JFrame implements ActionListener{
                               item_count=" ";
                         }
                        
-                        String[] dataLists= {idString,item_name,item_count};// pole Stringov
+                        String[] dataLists= {idString,item_name,item_count,descString,create_at};// pole Stringov
                         defaultModel.addRow(dataLists);// pridanie row do default modelu
                         
                   }
@@ -330,6 +341,7 @@ public class Warehouse  extends JFrame implements ActionListener{
                                     field_1.setText(table.getModel().getValueAt(listItems,0).toString());
                                     field_2.setText(table.getModel().getValueAt(listItems,1).toString());
                                     field_3.setText(table.getModel().getValueAt(listItems,2).toString());
+                                    field_6.setText(table.getModel().getValueAt(listItems, 3).toString());
                                     this.repaint();                                  
                               }
                               private void repaint() {
