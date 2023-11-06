@@ -78,7 +78,7 @@ public class Item {
       /**
        * @return the description
        */
-      public String getDescription() {
+      public String getDescription() {            
             return description;
       }
       /**

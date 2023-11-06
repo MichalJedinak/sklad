@@ -1,6 +1,9 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import client.HttpSimpleCrudClient;
 import entity.Item;
 import net.miginfocom.swing.MigLayout;
@@ -9,7 +12,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.util.List;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
@@ -17,7 +25,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 /**
  * MigLayout in GUI 
  * 
@@ -80,11 +87,6 @@ public class WarehouseRest  extends JFrame implements ActionListener{
       JLabel label_5 = new JLabel("Avalilable ");
       JTextField field_5 = new JTextField(5);
       JButton create = new JButton("Create item");
-
-
-      String url  = "jdbc:mysql://localhost:3306/sklad";
-      String user = "root";
-      private String password = "show_pussy8squirrel~hairy";
       
       public WarehouseRest(){
 
@@ -192,64 +194,8 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   item.addActionListener(this);
             }
       }
-      ///  funkcia pre zobrazenie údajov z databázovej tabulky do JFramu pre ďaľšiu prácu s údajmi
-      public void showDataFromDatabaseTable(){
-           
-            Connection connection = null;
-            try {
-                  connection = DriverManager.getConnection(url, user,password);
-                  Statement statement = connection.createStatement();
-                  ResultSet resulset = statement.executeQuery("SELECT * FROM item;");
-               
-                  DefaultTableModel defaultModel = new DefaultTableModel();
-                  /*  nastavíme pre defaul model údaje do stĺpcov ( table columns )
-                   * pomocou ResulsetMetaData getMetaTada to nam umožní načítať stĺpce s tabulky aj s názvami
-                  */
-                  java.sql.ResultSetMetaData rsmd = resulset.getMetaData();
-                  // potrebujeme zistiť kolko je stĺpcou v tabulke 
-                  int cols = rsmd.getColumnCount(); //  do premennej cols si uložíme počet stlpcov
-                  System.out.println(cols);
-                  // teraz si vytvoríme pole Stringov v ktorom si zobrazíme mená 
-                  //pre jednotlivé stĺpce cez for cyklus
-                  String[] colName = new String[cols];
-                  for(int i = 0; i<cols;i++)
-                  colName[i]=rsmd.getColumnName(i+1);// použijeme get column Name s resulset meta data
-                  defaultModel.setColumnIdentifiers(colName);//  default modelu nastavíme identifikované stĺpce
-                 /*   cez while cyklus si z resulsetu vyberieme hodnoty do pola Stringov 
-                  ktoré použijeme na nastavenie riadkov v defout modely */
-                  while(resulset.next()){
-                        /*Vytvoríme si premenné podľa toho čo berieme z tabulky  int string etc.. */
-                        int id=resulset.getInt(1);
-                        String idString = String.valueOf(id);
-                        String item_name=    resulset.getString(2);
-                        int l = resulset.getInt(3);
-                        String item_count= String.valueOf(l);
-                   
-                        if(resulset.getString("name")==null){
-                              item_name=" ";
-                        }
-                        if(resulset.getInt("available")==0){
-                              item_count=" ";
-                        }
-                       String descr = resulset.getString(4);
-                       String createdAt = resulset.getString(5);
-                        String[] dataLists= {idString,item_name,item_count,descr,createdAt};// pole Stringov
-                        defaultModel.addRow(dataLists);// pridanie row do default modelu
-                        
-                  }
-                  table.setModel(defaultModel);// tabulke nastavíme model
-                 /*A uzavrieme spojenie a čo treba */
-                  connection.close();
-                  statement.close();
-                  resulset.close();
-            } catch (Exception e) {
-                  /* Uppozornenie pri zlyhaní načítania údajov s sql tabulky do JTabulky */
-                  JOptionPane.showMessageDialog(null, e, "CHYBA", JOptionPane.ERROR_MESSAGE);
-                  e.printStackTrace();
-            }
-      }
-
-      ////////////   buttons event nastavenie jednotlivých funkcií pre buttons 
+      
+      ////////////   buttons event - setings functions for buttons 
       @Override
       public void actionPerformed(ActionEvent e) {
             
@@ -274,7 +220,8 @@ public class WarehouseRest  extends JFrame implements ActionListener{
             if(e.getSource()==button){
                    pane.add(table);
                  pane.setViewportView(table);
-                  showDataFromDatabaseTable();
+                 // loading data into the table
+                 loadDataIntoTable();
                   table.addMouseListener(new MouseAdapter() {
                            @Override
                            public void mouseClicked(MouseEvent e) {
@@ -312,7 +259,7 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   for(JTextField field :filedList){
                         field.setText("");                    
                   }     
-                  showDataFromDatabaseTable();
+                  loadDataIntoTable();
                   this.repaint();this.validate();
             }
             // button delete send DELETE metod from HttpSimpleCrudClient;
@@ -337,7 +284,8 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   for(JTextField field :filedList){
                         field.setText("");
                   }
-                  showDataFromDatabaseTable();
+              // loading data into the table
+                loadDataIntoTable();
                   this.repaint();this.validate();
             }
             if(e.getSource()==back){
@@ -346,7 +294,8 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                               field.setText("");
                         }
                   }
-                  showDataFromDatabaseTable();  
+                 // loading data into the table
+                loadDataIntoTable();
                   this.repaint();   
             }
             // button create send POST metod from HttpSimpleCrudClient;
@@ -358,12 +307,29 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   item.setDescription(field_7.getText());
                   System.out.println(item.toString());
                   if(item != null){
-                        try {
-                              HttpSimpleCrudClient.addObject(new URL("http://localhost:8080/item"), item);
-                              JOptionPane.showConfirmDialog(null,"Item is created "+item.toString());
-                        } catch (MalformedURLException e1) {                            
-                              e1.printStackTrace();
+                    int resultOption= JOptionPane.showConfirmDialog(null,
+                                                "Item is created \n"+item.toString()
+                                                +"\nAre you sure you want to create an object?");
+                    if(resultOption== JOptionPane.YES_OPTION){
+                          try {
+                                HttpSimpleCrudClient.addObject(new URL("http://localhost:8080/item"), item);
+                               // loading data into the table
+                               loadDataIntoTable();
+                                // cleare fields text 
+                                for(JTextField f :filedList){
+                                    f.setText("");
+                                    } 
+                              } catch (MalformedURLException e1) {                            
+                                    e1.printStackTrace();
+                                    JOptionPane.showMessageDialog(null, e);  
+                              }
+                    }if(resultOption==JOptionPane.NO_OPTION || resultOption==JOptionPane.CANCEL_OPTION){
+                        for(JTextField f :filedList){
+                              f.setText("");
                         }
+                       // loading data into the table
+                       loadDataIntoTable();
+                    }
                   }else{
                         System.err.println(" Object could not be created ");
                   }
@@ -392,6 +358,78 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   System.err.println(e);
                   JOptionPane.showMessageDialog(null,e, "Upozornenie",JOptionPane.ERROR_MESSAGE);
             }
+      }
+      
+      /**
+       * @param items List Items from sql 
+       */
+      public void updateTable(List<Item> items) {
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("id");
+            model.addColumn("name");
+            model.addColumn("avalilable");
+            model.addColumn("description");
+            model.setRowCount(0); // Vyčistí tabulku
+            // set defaultTable model
+            for (Item item : items) {
+                model.addRow(new Object[] { item.getId(),
+                item.getName(),item.getAvailable(),item.getDescription() });
+            }
+            table.setModel(model);
+        }
+        
+      //   table connect whot rest 
+      /**
+       * 
+       */
+      public void  loadDataIntoTable(){
+            try {
+                  // call getObject()
+                  List<Item> items = getObjects(new URL("http://localhost:8080/item"));
+                  updateTable(items);
+                  
+            } catch (Exception e) {
+                  System.err.println(e);
+            }
+      }
+      /**
+       * @param newUrl
+       * @return
+       */
+      private List<Item> getObjects(URL newUrl) {
+            URL url;
+            List<Item> items = new ArrayList<>();
+            try {
+                  // Create a URL object with the target URL
+                  url= new URL(newUrl.toString());
+                  // Open a connection to the URL
+                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                  connection.setRequestMethod("GET");
+                  int responseCode = connection.getResponseCode();
+                  System.out.println("Response Code: " + responseCode);
+
+                  if (responseCode == HttpURLConnection.HTTP_OK) {
+                        // Read the response from the server
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String line;
+                        StringBuffer response = new StringBuffer();
+                        while ((line = reader.readLine()) != null) {
+                              response.append(line);
+                        }
+                        Gson gson = new Gson();
+                        items = gson.fromJson(response.toString(), new TypeToken<List<Item>>(){}.getType());
+                        reader.close();
+                        // Print the response
+                        System.out.println("Response Body:");
+                        System.out.println(response.toString());
+                    } else {
+                        System.out.println("GET request failed.");
+                    }
+                       connection.disconnect();  
+            } catch (IOException e) {
+                  System.err.println(e+" connection is faul");
+            }
+            return items;
       }
 }
 /*
