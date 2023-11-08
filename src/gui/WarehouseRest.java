@@ -365,6 +365,7 @@ public class WarehouseRest  extends JFrame implements ActionListener{
             model.addColumn("name");
             model.addColumn("avalilable");
             model.addColumn("description");
+            model.addColumn("created_at");
             model.setRowCount(0); // Vyčistí tabulku
             // set defaultTable model
             for (Item item : items) {
