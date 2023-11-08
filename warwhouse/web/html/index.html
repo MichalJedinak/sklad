@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Werehouse</title>
+      <link rel="shortcut icon" href="/src//resources/frame_icon.png" type="image/x-icon">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/sklad/src/web/css/style.css">
+
+</head>
+<body>
+      <header class="page_header">
+            <nav class="nav">
+                  <ul class="nav_list">
+                        <li class="">
+                              <h2>Adding and Editing Items in the Warehouse</h2>
+                        </li >
+                        <li>
+                              <a  href="#" target="_parent" rel="noopener" onclick="ShowAdd()">Add Item</a>
+                        </li >
+                        <li>
+                              <a href="#" target="_parent" rel="noopener" onclick="ShowEdit()">Edit Item</a>
+                        </li>
+                  </ul>
+
+            </nav>
+            
+      </header>
+      <main id="content" class=" page_main">
+
+            <section id="section">
+
+                  <div id="add" class="adding">
+                        <h2 class="group">Add new Item in to the Database </h2>
+
+                        <!-- <iframe src="#" frameborder="0" style="height:200px;width:300px;" title="Iframe Example"></iframe> -->
+                  <form action="post" method="post" id="add_form">
+                        <label for="addName">Item name</label>
+                        <input id="addName" name="name" placeholder="Item_name" required ><br>
+                        <label for="addCount">Item count</label>
+                        <input type="number" id="addCount" name="available" placeholder="Item_count" required> 
+                        <button name="addingButton" type="submit" id="add_button">Add Item</button>           
+                  </form>
+                  <table>
+                        <thead>
+                              <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">item_name</th>
+                                    <th scope="col">item_count</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              <tr>
+                                    <th>1</th>
+                                    <td>name 1</td>
+                                    <td>80</td>
+                              </tr>
+                              <tr>
+                                    <th>2</th>
+                                    <td>name 2</td>
+                                    <td>62</td>
+                              </tr>
+                              <tr>
+                                    <th>3</th>
+                                    <td>name 3</td>
+                                    <td>39</td>
+                              </tr>
+                              <tr>
+                                    <th>4</th>
+                                    <td>name 4</td>
+                                    <td>100</td>
+                              </tr>
+                              <tr>
+                                    <th>1</th>
+                                    <td>name</td>
+                                    <td>count</td>
+                              </tr>
+                        </tbody>
+                  </table>
+            </div>
+            
+            <div id="edit" class="editing">
+                  <form action="/" method="post" id="edit_form">
+                        <label  > Select data from Table for Edit !</label><br>
+                        <label for="editId">Id</label>
+                        <input  id="editId" name="id" placeholder="id" required  readonly><br>
+                        <label for="editName">Item name</label>
+                        <input  id="editName" name="name" placeholder="Item_name" required><br>
+                        <label for="editCount">Item count</label>
+                        <input  id="editCount" name="available" placeholder="Item_count" required> 
+                        <button name="editButton" type="submit" id="edit_button" >Edit Item</button>           
+                  </form>
+                  <table>
+                        <thead>
+                              <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">item_name</th>
+                                    <th scope="col">item_count</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              <tr>
+                                    <th scope="row">1</th>
+                                    <td>name 1</td>
+                                    <td>80</td>
+                              </tr>
+                              <tr>
+                                    <th scope="row">2</th>
+                                    <td>name 2</td>
+                                    <td>62</td>
+                              </tr>
+                              <tr>
+                                    <th scope="row">3</th>
+                                    <td>name 3</td>
+                                    <td>39</td>
+                              </tr>
+                              <tr>
+                                    <th scope="row">4</th>
+                                    <td>name 4</td>
+                                    <td>100</td>
+                              </tr>
+                              <tr>
+                                    <th scope="row">5</th>
+                                    <td>name 5</td>
+                                    <td>0</td>
+                              </tr>
+                        </tbody>
+                  </table>
+            </div>
+            
+       </section>
+            
+      </main>
+      <footer class="page_footer"><h3> &COPY;By me 🐻</h3></footer>
+      <script src="/sklad/src/web/js/jQuery-colors-mini.js"></script> 
+      <script src="/sklad/src/web/js/jquery3-6-0-min.js"></script>   
+      <script src="/sklad/src/web/js/srcript.js"></script>
+</body>
+</html>
