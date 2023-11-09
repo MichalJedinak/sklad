@@ -28,111 +28,144 @@
             
       </header>
       <main id="content" class=" page_main">
-
+      
             <section id="section">
 
                   <div id="add" class="adding">
                         <h2 class="group">Add new Item in to the Database </h2>
 
                         <!-- <iframe src="#" frameborder="0" style="height:200px;width:300px;" title="Iframe Example"></iframe> -->
-                  <form action="post" method="post" id="add_form">
-                        <label for="addName">Item name</label>
+                  <form action="http://localhost:8080/item" method="post" id="add_form">
+                        <label for="addName">Name</label>
                         <input id="addName" name="name" placeholder="Item_name" required ><br>
-                        <label for="addCount">Item count</label>
-                        <input type="number" id="addCount" name="available" placeholder="Item_count" required> 
+                        <label for="addCount">Available</label>
+                        <input type="number" id="addCount" name="available" placeholder="Item_count" required> <br>
+                        <label for="addDescription">Description</label>
+                        <input  id="addDescription" name="description" placeholder="description" required> <br>
                         <button name="addingButton" type="submit" id="add_button">Add Item</button>           
-                  </form>
-                  <table>
-                        <thead>
-                              <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">item_name</th>
-                                    <th scope="col">item_count</th>
-                              </tr>
-                        </thead>
-                        <tbody>
-                              <tr>
-                                    <th>1</th>
-                                    <td>name 1</td>
-                                    <td>80</td>
-                              </tr>
-                              <tr>
-                                    <th>2</th>
-                                    <td>name 2</td>
-                                    <td>62</td>
-                              </tr>
-                              <tr>
-                                    <th>3</th>
-                                    <td>name 3</td>
-                                    <td>39</td>
-                              </tr>
-                              <tr>
-                                    <th>4</th>
-                                    <td>name 4</td>
-                                    <td>100</td>
-                              </tr>
-                              <tr>
-                                    <th>1</th>
-                                    <td>name</td>
-                                    <td>count</td>
-                              </tr>
-                        </tbody>
-                  </table>
+                  </form>                  
+                  <div class="scroll-table-container">
+                        <table id="sklad">
+                              <thead>
+                                    <tr>
+                                          <th scope="col">id</th>
+                                          <th scope="col">name</th>
+                                          <th scope="col">available</th>
+                                          <th scope="col">description</th>
+                                          <th scope="col">created_at</th>
+                                    </tr>
+                              </thead>                            
+                        </table>
+                  </div>
             </div>
             
             <div id="edit" class="editing">
-                  <form action="/" method="post" id="edit_form">
-                        <label  > Select data from Table for Edit !</label><br>
+                  <form action="http://localhost:8080/item" method="post" id="edit_form">
+                        <label  > Select data from Table for Edit !</label><br><br>
+
                         <label for="editId">Id</label>
                         <input  id="editId" name="id" placeholder="id" required  readonly><br>
                         <label for="editName">Item name</label>
-                        <input  id="editName" name="name" placeholder="Item_name" required><br>
-                        <label for="editCount">Item count</label>
-                        <input  id="editCount" name="available" placeholder="Item_count" required> 
+                        <input  id="editName" name="name" placeholder="name" required><br>
+                        <label for="editAvailable">Available</label>
+                        <input  id="editAvailable" name="available" placeholder="available" required><br>
+                        <label for="editDescription">Description</label>
+                        <input  id="editDescription" name="description" placeholder="description" required> <br>
+                    
                         <button name="editButton" type="submit" id="edit_button" >Edit Item</button>           
                   </form>
-                  <table>
-                        <thead>
-                              <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">item_name</th>
-                                    <th scope="col">item_count</th>
-                              </tr>
-                        </thead>
-                        <tbody>
-                              <tr>
-                                    <th scope="row">1</th>
-                                    <td>name 1</td>
-                                    <td>80</td>
-                              </tr>
-                              <tr>
-                                    <th scope="row">2</th>
-                                    <td>name 2</td>
-                                    <td>62</td>
-                              </tr>
-                              <tr>
-                                    <th scope="row">3</th>
-                                    <td>name 3</td>
-                                    <td>39</td>
-                              </tr>
-                              <tr>
-                                    <th scope="row">4</th>
-                                    <td>name 4</td>
-                                    <td>100</td>
-                              </tr>
-                              <tr>
-                                    <th scope="row">5</th>
-                                    <td>name 5</td>
-                                    <td>0</td>
-                              </tr>
-                        </tbody>
-                  </table>
+                  <div class="scroll-table-container">
+
+                        <table id ="table_2" class="scroll-table-container">
+                              <thead>
+                                    <tr>
+                                          <th scope="col">id</th>
+                                          <th scope="col">name</th>
+                                          <th scope="col">available</th>
+                                          <th scope="col">description</th>
+                                          <th scope="col">created_at</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                   
+                        </table>
+                  </div>
             </div>
             
        </section>
             
       </main>
       <footer class="page_footer"><h3> &COPY;By me 🐻</h3></footer>
+      <script>
+            var button = document.getElementById('add_button');
+            const url = 'http://localhost:8080/item'; // Nastavte URL svojej databázy
+            const table = document.getElementById('sklad');
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                  data.forEach(row => {
+                        const newRow = table.insertRow();
+                        const cell1 = newRow.insertCell(0);
+                        const cell2 = newRow.insertCell(1);
+                        const cell3 = newRow.insertCell(2);
+                        const cell4 = newRow.insertCell(3);
+                        const cell5 = newRow.insertCell(4);
+                        
+                        cell1.innerHTML = row.id;
+                        cell2.innerHTML = row.name;
+                        cell3.innerHTML = row.available;
+                        cell4.innerHTML = row.description;
+                        cell5.innerHTML = row.created_at;
+                                           
+                  });
+            })
+            .catch(error => {
+                  console.error('Chyba pri načítaní údajov z databázy:', error);
+            });
+            
+            //__________________________________________________________________________
+            const table2 = document.getElementById('table_2');
+            const url2 = 'http://localhost:8080/item'; // Nastavte URL svojej databázy
+            fetch(url2)
+            .then(response => response.json())
+            .then(data => {
+                  data.forEach(row => {
+                        const rowTable2 = table2.insertRow();
+                        const cell1_2 = rowTable2.insertCell(0);
+                        const cell2_2 = rowTable2.insertCell(1);
+                        const cell3_2 = rowTable2.insertCell(2);
+                        const cell4_2 = rowTable2.insertCell(3);
+                        const cell5_2 = rowTable2.insertCell(4);
+
+                        cell1_2.innerHTML = row.id;
+                        cell2_2.innerHTML = row.name;
+                        cell3_2.innerHTML = row.available;
+                        cell4_2.innerHTML = row.description;
+                        cell5_2.innerHTML = row.created_at;
+                  });
+            })
+            .catch(error => {
+                  console.error('Chyba pri načítaní údajov z databázy:', error);
+            });
+            
+      table2.addEventListener('click', function(event) {
+      const target = event.target;
+      if (target.tagName === 'TD') {
+            const row = target.parentNode;
+            const cells = row.querySelectorAll('td');
+            const id = cells[0].textContent;
+            const available = cells[1].textContent;
+            const description = cells[2].textContent;
+            const created_at = cells[3].textContent;
+
+            document.getElementById('editId').value = id;
+            document.getElementById('editName').value = available;
+            document.getElementById('editAvailable').value = description;
+            document.getElementById('editDescription').value = created_at;
+      }
+      });
+
+      </script>
       <script src="/sklad/src/web/js/jQuery-colors-mini.js"></script> 
       <script src="/sklad/src/web/js/jquery3-6-0-min.js"></script>   
       <script src="/sklad/src/web/js/srcript.js"></script>
