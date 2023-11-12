@@ -62,7 +62,9 @@ html {
       padding: 1em;
       gap: 1em;
   }
+ 
   .scroll-table-container{
+    max-width: 660px;
     max-height:20em;
     overflow: auto;
   }
@@ -105,11 +107,9 @@ html {
      width: 6.25em;   
   }
   #add_form{
-     display: contents;
      gap: 2em;
   }
-  #edit_form{
-    display: contents;
+  #edit_form{  
     gap: 2em;
   }
   #add_button{
@@ -143,6 +143,15 @@ html {
   #edit_form label:nth-of-type(2){
     margin-right: 4.6em; 
   }
+  #edit_form label:nth-of-type(3){
+    margin-right: .9em; 
+  }
+  #edit_form label:nth-of-type(4){
+    margin-right: 1.5em; 
+  }
+  #edit_form label:nth-of-type(5){
+    margin-right: .4em; 
+  }
   #edit_form input{
     width: 150px;
     height: 30px;
@@ -152,10 +161,7 @@ html {
     width: 80px;
     background-color: #d8d3d3d2;
   }
-  .etiting form label:first-child {
-    padding-left: 1em;
-  }
-  .editing table tr th:first-child,
+   .editing table tr th:first-child,
   .editing table thead tr th{
    padding-left: .7em;
     color: black;
@@ -170,7 +176,7 @@ html {
   .editing table td{
     color: #0e0d0d;
     font-size: clamp(.8em, 3vw,1.5em);
-    font-weight: 700;
+    font-weight: 600;
     text-shadow:0 0 8px #fff ;
     padding-left: .7em;
   }
@@ -179,6 +185,10 @@ html {
     font-size: clamp(.8em, 3vw,1.5em);
     font-weight: bold;
     text-shadow:0 0 4px #fff ;
+  }
+  .editing button{
+    margin-bottom: 1em;
+    margin-left: a;
   }
  
  
