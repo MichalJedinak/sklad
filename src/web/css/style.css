@@ -112,6 +112,15 @@ html {
   #edit_form{  
     gap: 2em;
   }
+  .adding table th {
+    background-color:rgb(133, 36, 36);
+    color: white;
+    font-size: clamp(.8em, 3vw,1.5em);
+    font-weight: 600;
+  }.adding table td:nth-child(1){
+    background-color:rgb(133, 63, 63);
+    color: white;
+  }
   #add_button{
      width: 6.25em;
       height: 2.7em;
@@ -122,26 +131,30 @@ html {
   }
   #edit_form label{
     font-weight: 700;
+    font-family: Arial;
     margin-right: 1em;
     margin-bottom: .5em;
-    font-size: clamp(1.2em,4wv,1.9em);
+    font-size: clamp(1.4em,3vw,2.2em);
     color: darkred;
-    text-shadow: 1px 2px,9px black;
+    text-shadow: 1px 2px,9px rgb(247, 241, 241);
+    box-shadow:1px 2px 9px #fff;
   
   }
   #edit_form label:nth-last-of-type(5){
     width: auto;
+    display: flex;
     height: 80px;
     padding: 5px;
     margin-bottom: 1em;
-    font-size: clamp(2em,4wv,2.5em); 
+    font-size: clamp(1.6em,4vh,2.5em); 
     font-weight: bold;    
     text-transform: uppercase;
+    text-align: center;
     text-shadow: 2px 2px 15px white;
     background-color: white;
   }
   #edit_form label:nth-of-type(2){
-    margin-right: 4.6em; 
+    margin-right: 4.9em; 
   }
   #edit_form label:nth-of-type(3){
     margin-right: .9em; 
@@ -153,9 +166,18 @@ html {
     margin-right: .4em; 
   }
   #edit_form input{
-    width: 150px;
+    width: 200px;
     height: 30px;
     margin-bottom: .5em;
+    font-family: Verdana;
+    font-weight: 600;
+  }
+  #edit_form input:nth-child(5)  {
+    margin-right: .4em; 
+    width: 50px;
+  }
+  #edit_form input:nth-of-type(3){
+    width: 90px;
   }
   #editId{
     width: 80px;
@@ -180,11 +202,14 @@ html {
     text-shadow:0 0 8px #fff ;
     padding-left: .7em;
   }
-  .editing table th{
+  .editing table th {
+    background-color:rgb(33, 174, 240);
     color: #0e0d0d;
     font-size: clamp(.8em, 3vw,1.5em);
     font-weight: bold;
     text-shadow:0 0 4px #fff ;
+  }.editing table td:nth-child(1){
+    background-color:rgb(129, 203, 238);
   }
   .editing button{
     margin-bottom: 1em;

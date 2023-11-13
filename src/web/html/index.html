@@ -36,11 +36,11 @@
                         <form action="http://localhost:8080/item" method="post" id="add_form">
                               <label for="addName">Name</label>
                               <input id="addName" name="name" placeholder="Item_name" required ><br>
-                              <label for="addCount">Available</label>
-                              <input type="number" id="addCount" name="available" placeholder="Item_count" required> <br>
+                              <label for="addAvailable">Available</label>
+                              <input type="number" id="addAvailable" name="available" placeholder="Item_count" required> <br>
                               <label for="addDescription">Description</label>
                               <input  id="addDescription" name="description" placeholder="description" required> <br>
-                              <button name="addingButton" type="submit" id="add_button"  onclick="">Add Item</button>           
+                              <button name="addingButton" type="submit" id="add_button"  onclick="createObject()">Add Item</button>           
                         </form>                  
                   <div class="scroll-table-container">
                         <table id="sklad">
@@ -96,5 +96,98 @@
       <footer class="page_footer"><h3> &COPY;By me 🐻</h3></footer>
  
       <script src="/sklad/src/web/js/srcript.js"></script>
+      <script>       
+
+            var editId = document.getElementById("editId").value;    
+            var editName = document.getElementById("editName").value;
+            var editAvailable = document.getElementById("editAvailable").value;
+            var editDescription = document.getElementById("editDescription").value;
+            console.log(editId,editAvailable,editDescription);
+            //  vytvorenie objektu
+            var editObject = {            
+                  name: editName,
+                  available: editAvailable,
+                  description:editDescription
+            };
+            console.log(editObject);
+             const apiUrl = 'https://localhost:8080/item'; 
+
+            function sendData(method, data, callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.open(method, apiUrl);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+
+            xhr.onload = function () {
+                  if (xhr.status === 200) {
+                        callback(null, JSON.parse(xhr.responseText));
+                  } else {
+                        callback(`Error: ${xhr.status}`);
+                  }
+            };
+            xhr.send(JSON.stringify(data));
+            }
+
+            function createData() {
+            const addName = document.getElementById("addName").value;
+            //??? var id = document.getElementById("addId").value;    
+            const available = document.getElementById("addAvailable").value;
+            const description = document.getElementById("addDescription").value;
+            const data = {
+                  action: 'create',
+                  values: {
+                        addName:addName,
+                        addAvailable:available,
+                        addDescription:description
+                  }
+            };
+
+            sendData('POST', data, function (error, response) {
+                  if (error) {
+                        console.error(error);
+                  } else {
+                        console.log('Data created:', response);
+                  }
+            });
+            }
+
+            function updateData() {
+            const data = {
+                  action: 'update',
+                  values: {
+                        editId:editId,
+                        editName:editName,
+                        editAvailable:editAvailable,
+                        editDescription:editDescription
+                  }
+            };
+
+            sendData('PUT', data, function (error, response) {
+                  if (error) {
+                        console.error(error);
+                  } else {
+                        console.log('Data updated:', response);
+                  }
+            });
+            }
+
+            function deleteData() {
+            const data = {
+                  action: 'delete',
+                  values: {
+                        editId:editId,
+                        editName:editName,
+                        editAvailable:editAvailable,
+                        editDescription:editDescription
+                  }
+            };
+            sendData('DELETE', data, function (error, response) {
+                  if (error) {
+                        console.error(error);
+                  } else {
+                        console.log('Data deleted:', response);
+                  }
+            });
+            }
+      </script>
 </body>
 </html>

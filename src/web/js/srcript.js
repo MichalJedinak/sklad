@@ -17,10 +17,13 @@ function ShowEdit() {
     edit.style.visibility = "visible";
 }
 
+//______________  UPDATE ______________________________
 function submitFormDataToDatabase() {
 var name = document.getElementById("editName").value;
 var id = document.getElementById("editId").value;    
+id= Number(id);
 var available = document.getElementById("editAvailable").value;
+available= Number(available);
 var description = document.getElementById("editDescription").value;
 console.log(name,available,description);
    //  vytvorenie objektu
@@ -35,7 +38,7 @@ console.log(name,available,description);
     const url = 'http://localhost:8080/item/'+id;
     console.log(url);
     fetch(url, {
-        method: 'PATCH',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -50,6 +53,41 @@ console.log(name,available,description);
         console.error('Chyba pri odosielaní požiadavky:', error);
     });
 }
+//________________________INSERT ________________________________
+function createObject() {
+    const name = document.getElementById("addName").value;
+   //??? var id = document.getElementById("addId").value;    
+    const available = document.getElementById("addAvailable").value;
+    available = Number(available);
+    const description = document.getElementById("addDescription").value;
+    console.log(name,available,description);
+       //  vytvorenie objektu
+        var object = {            
+            name: name,
+            available: available,
+            description:description
+        };
+        console.log(object);
+    
+        // Odoslanie objektu na server
+        const url = 'http://localhost:8080/item';
+        console.log(url);
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(object)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Spracovanie odpovede od servera
+            console.log('Odpoveď od servera:', data);
+        })
+        .catch(error => {
+            console.error('Chyba pri odosielaní požiadavky:', error);
+        });
+    }
 
 const url = 'http://localhost:8080/item'; // Nastavte URL svojej databázy
 const table = document.getElementById('sklad');
@@ -68,8 +106,7 @@ fetch(url)
             cell2.innerHTML = row.name;
             cell3.innerHTML = row.available;
             cell4.innerHTML = row.description;
-            cell5.innerHTML = row.created_at;
-                               
+            cell5.innerHTML = row.created_at;                               
       });
 })
 .catch(error => {
@@ -77,6 +114,7 @@ fetch(url)
 }); 
 
 //__________________________________________________________________________
+//              tabulky s serveru 
 const table2 = document.getElementById('table_2');
 const url2 = 'http://localhost:8080/item'; // Nastavte URL svojej databázy
 fetch(url2)
@@ -100,22 +138,22 @@ fetch(url2)
 .catch(error => {
       console.error('Chyba pri načítaní údajov z databázy:', error);
 });
-
+//____________   načitanie udajov s tabulky do inputov__________
 table2.addEventListener('click', function(event) {
 const target = event.target;
-if (target.tagName === 'TD') {
-const row = target.parentNode;
-const cells = row.querySelectorAll('td');
-const id = cells[0].textContent;
-const name = cells[1].textContent;
-const available = cells[2].textContent;
-const description = cells[3].textContent;
+    if (target.tagName === 'TD') {
+    const row = target.parentNode;
+    const cells = row.querySelectorAll('td');
+    const id = cells[0].textContent;
+    const name = cells[1].textContent;
+    const available = cells[2].textContent;
+    const description = cells[3].textContent;
 
-document.getElementById('editId').value = id;
-document.getElementById('editName').value = name;
-document.getElementById('editAvailable').value = available;
-document.getElementById('editDescription').value = description;
-}
+    document.getElementById('editId').value = id;
+    document.getElementById('editName').value = name;
+    document.getElementById('editAvailable').value = available;
+    document.getElementById('editDescription').value = description;
+    }
 });
 
 
