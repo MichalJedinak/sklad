@@ -19,9 +19,7 @@ function ShowEdit() {
 //________________create object from edit inputs_____________
 const objectName = document.getElementById("editName").value;
 const id = document.getElementById("editId").value;    
-id= Number(id);
 const available = document.getElementById("editAvailable").value;
-available= Number(available);
 const description = document.getElementById("editDescription").value;
 console.log(objectName,available,description);
    //  vytvorenie objektu
