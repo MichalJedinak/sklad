@@ -85,9 +85,10 @@ html {
       width: 200px;
       height: 3em;
       margin: .5em;
-      font-family: 'Times New Roman', Times, serif;
+      font-family: Verdana;
       font-style: italic;
       font-size: 1em;
+      padding: 0;
   }
   .adding label {
       position: relative;    

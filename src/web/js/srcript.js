@@ -156,6 +156,15 @@ const target = event.target;
     }
 });
 
+const inputs = document.getElementsByTagName("input");
+      for(var i = 0;i<inputs.length;i++) {                    
+             if( i !== 1 && i !==3 && i !==5){          
+                  inputs[i].onclick = function () {
+                       this.value="";
+                  };
+               }
+         
+      }
 
 
 
