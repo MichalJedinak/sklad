@@ -245,8 +245,10 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   if(item.getId()!=null){
                         try {
                               HttpSimpleCrudClient.updateObject(new URL("http://localhost:8080/item/"),id, item);
+                              JOptionPane.showMessageDialog(null,"Update :"+ item.toString());
                         } catch (MalformedURLException e1) {                            
                               e1.printStackTrace();
+                              JOptionPane.showMessageDialog(null,e1);
                         }
                   }else{
                         System.err.println("Item whit id:+"+id+" dont exist !!");

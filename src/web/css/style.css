@@ -62,7 +62,14 @@ html {
       padding: 1em;
       gap: 1em;
   }
- 
+ input{
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    border-radius: 7px;
+    border: 1px solid black;
+}
   .scroll-table-container{
     max-width: 660px;
     max-height:20em;
@@ -83,13 +90,16 @@ html {
  .adding input {
       position: relative;
       width: 200px;
-      height: 3em;
+      height: 2.7em;
       margin: .5em;
       font-family: Verdana;
       font-style: italic;
       font-size: 1em;
       padding: 0;
   }
+  .adding input:nth-last-of-type(2) {
+    width: 90px;
+}
   .adding label {
       position: relative;    
       font-weight: bold;
@@ -128,7 +138,7 @@ html {
       height: 2.7em;
       font-family: 'Times New Roman', Times, serif;
       background-color: lightgreen;
-      margin-left: 15em;
+      margin-left: auto;
       margin-bottom: .5em;
   }
   #edit_form label{
@@ -181,6 +191,9 @@ html {
   #edit_form input:nth-of-type(3){
     width: 95px;
   }
+  #edit_form input:nth-of-type(4){
+    width:64%;
+  }
   #editId{
     width: 80px;
     background-color: #d8d3d3d2;
@@ -193,6 +206,7 @@ html {
   table{
     border: .02em solid black;
     background-color: #fff;
+    width: 100%;
   }
   table th,table td{
     border: .001em solid black;
@@ -214,10 +228,29 @@ html {
   }.editing table td:nth-child(1){
     background-color:rgb(129, 203, 238);
   }
-  .editing button{
-    margin-bottom: 1em;
-    margin-left: a;
+  button{
+    position: relative;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+  .btns{
+    display: flex;
+    padding: .6em;
   }
+  .editing button{
+    padding: .5rem;
+    font-family: Verdana;
+    margin-bottom: 1em;
+    background-color: rgb(4, 190, 4);
+  }
+  #deleteBtn{
+  margin-left: auto;
+  background-color: crimson;
+}
  
  
   

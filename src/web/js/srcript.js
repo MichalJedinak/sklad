@@ -16,22 +16,22 @@ function ShowEdit() {
     add.style.visibility = "hidden";
     edit.style.visibility = "visible";
 }
-
-//______________  UPDATE ______________________________
-function submitFormDataToDatabase() {
-var name = document.getElementById("editName").value;
-var id = document.getElementById("editId").value;    
+//________________create object from edit inputs_____________
+const objectName = document.getElementById("editName").value;
+const id = document.getElementById("editId").value;    
 id= Number(id);
-var available = document.getElementById("editAvailable").value;
+const available = document.getElementById("editAvailable").value;
 available= Number(available);
-var description = document.getElementById("editDescription").value;
-console.log(name,available,description);
+const description = document.getElementById("editDescription").value;
+console.log(objectName,available,description);
    //  vytvorenie objektu
-    var object = {            
-        name: name,
+    const object = {            
+        name: objectName,
         available: available,
         description:description
     };
+//______________  UPDATE ______________________________
+function submitFormDataToDatabase() {
     console.log(object);
 
     // Odoslanie objektu na server
@@ -114,7 +114,7 @@ fetch(url)
 }); 
 
 //__________________________________________________________________________
-//              tabulky s serveru 
+//              create table from server
 const table2 = document.getElementById('table_2');
 const url2 = 'http://localhost:8080/item'; // Nastavte URL svojej databázy
 fetch(url2)
@@ -138,7 +138,7 @@ fetch(url2)
 .catch(error => {
       console.error('Chyba pri načítaní údajov z databázy:', error);
 });
-//____________   načitanie udajov s tabulky do inputov__________
+//____________  reaload data from table to the inputs__________
 table2.addEventListener('click', function(event) {
 const target = event.target;
     if (target.tagName === 'TD') {
@@ -155,7 +155,7 @@ const target = event.target;
     document.getElementById('editDescription').value = description;
     }
 });
-
+//_________________ clean inputs on click_______________
 const inputs = document.getElementsByTagName("input");
       for(var i = 0;i<inputs.length;i++) {                    
              if( i !== 1 && i !==3 && i !==5){          
@@ -164,6 +164,27 @@ const inputs = document.getElementsByTagName("input");
                   };
                }
          
+      }
+//___________________________________delete item_____________________
+const deleteBtn = document.getElementById("deleteBtn");
+const delUrl = 'http://localhost:8080/item/'+id;
+const method = 'DELETE';
+      deleteBtn.onclick= function () {
+        fetch(delUrl, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(object)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Spracovanie odpovede od servera
+            console.log('Odpoveď od servera:', data);
+        })
+        .catch(error => {
+            console.error('Chyba pri odosielaní požiadavky:', error);
+        });
       }
 
 
