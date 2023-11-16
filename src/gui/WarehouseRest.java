@@ -299,7 +299,7 @@ public class WarehouseRest  extends JFrame implements ActionListener{
             // button create send POST metod from HttpSimpleCrudClient;
             if(e.getSource()==create){ 
                   Integer id = Integer.valueOf(field_5.getText()) ;  
-                  item = new Item();
+                  Item  item = new Item();
                   item.setName(field_4.getText());
                   item.setAvailable(id);
                   item.setDescription(field_7.getText());
@@ -311,6 +311,7 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                     if(resultOption== JOptionPane.YES_OPTION){
                           try {
                                 HttpSimpleCrudClient.addObject(new URL("http://localhost:8080/item"), item);
+                                JOptionPane.showMessageDialog(null,item.getName()+" is createt and writ in database");
                                // loading data into the table
                                loadDataIntoTable();
                                 // cleare fields text 
@@ -372,7 +373,7 @@ public class WarehouseRest  extends JFrame implements ActionListener{
             // set defaultTable model
             for (Item item : items) {
                 model.addRow(new Object[] { item.getId(),
-                item.getName(),item.getAvailable(),item.getDescription() });
+                item.getName(),item.getAvailable(),item.getDescription(),item.getCreated_at() });
             }
             table.setModel(model);
         }
